@@ -1,0 +1,23 @@
+@page
+@model DemoModel
+
+<h1>Peeps</h1>
+
+<ul>
+    @foreach (var item in Model.Items)
+    {
+        <li>@item</li>
+    }
+</ul>
+<p>Showing page @Model.CurrentPage of @(Model.NumberOfPages)</p>
+@if (!Model.FirstPage)
+{
+    var previous = new Dictionary<string, string> { { "p", (Model.CurrentPage - 1).ToString() } };
+    <a asp-all-route-data="previous">&lt;-</a>
+}
+
+@if (!Model.LastPage)
+{
+    var next = new Dictionary<string, string> { { "p", (Model.CurrentPage + 1).ToString() } };
+    <a asp-all-route-data="next">-&gt;</a>
+}
